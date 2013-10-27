@@ -218,7 +218,7 @@ class MAIN():
                     # signal gui thread to exit
                     WIN.setProperty('culrc.nolyrics', 'TRUE')
                     # notify user no lyrics were found
-                    xbmc.executebuiltin((u'Notification(%s,%s,%i)' % (__addonname__ + ": " + __language__(32001), song.artist + " - " + song.title, 2000)).encode('utf-8', 'ignore'))
+                    xbmc.executebuiltin((u'Notification(%s,%s,%i)' % (__addonname__ + ": " + __language__(32001), song.artist.decode("utf-8") + " - " + song.title.decode("utf-8"), 2000)).encode('utf-8', 'ignore'))
                 break
             xbmc.sleep( 50 )
         if xbmc.getCondVisibility('MusicPlayer.HasNext'):
