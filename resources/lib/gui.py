@@ -50,6 +50,11 @@ class MAIN():
                     xbmc.executebuiltin((u'Notification(%s,%s,%i)' % (__addonname__ , __language__(32004), 2000)).encode('utf-8', 'ignore'))
                     # start fetching lyrics
                     self.myPlayerChanged()
+                elif WIN.getProperty('culrc.force') == 'TRUE':
+                    # we're already running, user clicked button on osd
+                    WIN.setProperty('culrc.force','FALSE')
+                    self.current_lyrics = Lyrics()
+                    self.myPlayerChanged()
             else:
                 # we may have exited the music visualization screen
                 self.triggered = False
@@ -455,6 +460,8 @@ class GUI( xbmcgui.WindowXMLDialog ):
             self.exit_gui('quit')
         elif ( actionId == 101 ) or ( actionId == 117 ): # ACTION_MOUSE_RIGHT_CLICK / ACTION_CONTEXT_MENU
             self.reshow_choices()
+        elif ( actionId in ACTION_OSD ):
+            xbmc.executebuiltin("ActivateWindow(10120)")
 
 class MyPlayer(xbmc.Player):
     def __init__(self, *args, **kwargs):

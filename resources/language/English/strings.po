@@ -120,6 +120,10 @@ msgctxt "#32157"
 msgid "Clean song title (remove part in brackets)"
 msgstr ""
 
+msgctxt "#32158"
+msgid "Script is already running!"
+msgstr ""
+
 #Skin labels
 
 msgctxt "#32199"
