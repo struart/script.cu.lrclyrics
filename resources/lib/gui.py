@@ -83,7 +83,7 @@ class MAIN():
 
     def find_lyrics(self, song):
         # search embedded lrc lyrics
-        if ( __addon__.getSetting( "search_embedded" ) == "true" ):
+        if ( __addon__.getSetting( "search_embedded" ) == "true" and song.analyze_safe ):
             log('searching for embedded lrc lyrics')
             try:
                 lyrics = getEmbedLyrics(song, True)
@@ -107,7 +107,7 @@ class MAIN():
                     self.save_lyrics_to_file( lyrics )
                     return lyrics
         # search embedded txt lyrics
-        if ( __addon__.getSetting( "search_embedded" ) == "true" ):
+        if ( __addon__.getSetting( "search_embedded" ) == "true" and song.analyze_safe ):
             log('searching for embedded txt lyrics')
             try:
                 lyrics = getEmbedLyrics(song, False)

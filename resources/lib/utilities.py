@@ -80,6 +80,7 @@ class Song:
         self.artist = ""
         self.title = ""
         self.filepath = ""
+        self.analyze_safe = True
 
     def __str__(self):
         return "Artist: %s, Title: %s" % ( self.artist, self.title)
@@ -163,4 +164,10 @@ class Song:
             song.artist, song.title = get_artist_from_filename( song.filepath )
         if __addon__.getSetting( "clean_title" ) == "true":
             song.title = re.sub(r'\([^\)]*\)$', '', song.title)
+        
+        #Check if analyzing the stream is discouraged
+        do_not_analyze = xbmc.getInfoLabel('MusicPlayer.Property(DoNotAnalyze)')
+        if do_not_analyze == 'true':
+            song.analyze_safe = False
+        
         return song
