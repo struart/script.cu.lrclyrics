@@ -166,7 +166,7 @@ class Song:
             song.title = re.sub(r'\([^\)]*\)$', '', song.title)
         
         #Check if analyzing the stream is discouraged
-        do_not_analyze = xbmc.getInfoLabel('MusicPlayer.Property(DoNotAnalyze)')
+        do_not_analyze = xbmc.getInfoLabel('MusicPlayer.Property(do_not_analyze)')
         if do_not_analyze == 'true':
             song.analyze_safe = False
         
