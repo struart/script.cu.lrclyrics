@@ -2,6 +2,7 @@ import os
 import re
 import chardet
 from tagger import *
+from mutagen.flac import FLAC
 import xbmcvfs
 from utilities import *
 
@@ -25,7 +26,9 @@ def getEmbedLyrics(song, getlrc):
     else:
         lry = getID3Lyrics(filename, getlrc)
         if not lry:
-            return None
+            lry = getFlacLyrics(filename, getlrc)
+            if not lry:
+                return None
         lyrics.lyrics = lry
     return lyrics
 
@@ -170,3 +173,14 @@ def getID3Lyrics(filename, getlrc):
                 enc = chardet.detect(lyrics)['encoding']
             return lyrics.decode(enc)
     return None
+
+def getFlacLyrics(filename, getlrc):
+    try:
+        tags = FLAC(filename)
+        if tags.has_key('lyrics'):
+            lyr = tags['lyrics'][0]
+            match1 = re.compile('\[(\d+):(\d\d)(\.\d+|)\]').search(lyr)
+            if (getlrc and match1) or ((not getlrc) and (not match1)):
+                return lyr
+    except:
+        return None
