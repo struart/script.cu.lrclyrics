@@ -11,7 +11,7 @@ __language__  = sys.modules[ "__main__" ].__language__
 def getEmbedLyrics(song, getlrc):
     lyrics = Lyrics()
     lyrics.song = song
-    lyrics.source = __language__( 30002 )
+    lyrics.source = __language__( 32002 )
     lyrics.lrc = getlrc
     filename = song.filepath.decode("utf-8")
     lry = None
